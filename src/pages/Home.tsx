@@ -1,6 +1,7 @@
+import { useContext } from 'react';
 import { useHistory } from 'react-router-dom'
 
-import { auth, firebase } from '../services/firebase'
+import { AuthContext } from '../contexts/AuthContext';
 
 import illustrationImg from '../assets/images/illustration.svg'
 import logoImg from '../assets/images/llogo.svg';
@@ -12,33 +13,38 @@ import '../styles/auth.scss';
 
 export function Home() {
   const history = useHistory();
+  const { user, signInWithGoogle } = useContext(AuthContext)
 
-  function handleCreateRoom() {
+  async function handleCreateRoom() {
+    if (!user) {
+      await signInWithGoogle()
+    }
+
     history.push('/rooms/new');
   }
 
   return (
     <div id="page-auth">
       <aside>
-        <img src={illustrationImg} alt="Illustrasjon som symboliserer spørsmål og svar" />
-        <strong>Lag live spørsmål &amp; svar-rom</strong>
-        <p>Still spørsmål til publikum i sanntid.</p>
+        <img src={illustrationImg} alt="Ilustration simbolizing questions and answers" />
+        <strong>Create your live questions &amp; answers room</strong>
+        <p>Answer your audicence's questions in real time</p>
       </aside>
       <main>
         <div className="main-content">
           <img src={logoImg} alt="Lamegspørre" />
           <button onClick={handleCreateRoom} className="create-room">
             <img src={googleIconImg} alt="Google-logo" />
-            Lag din plass med Google.
+            Log with your Google account.
           </button>
-          <div className="separator">eller gå inn i et rom</div>
+          <div className="separator">or enter in a room</div>
           <form>
             <input
               type="text"
-              placeholder="Angi romkoden"
+              placeholder="Room code"
             />
             <Button type="submit">
-              Gå inn i rommet
+              Enter in a room
             </Button>
           </form>
         </div>

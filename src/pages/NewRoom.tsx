@@ -1,4 +1,6 @@
+// import { useContext } from 'react';
 import { Link } from 'react-router-dom'
+// import { AuthContext } from '../contexts/AuthContext';
 
 import illustrationImg from '../assets/images/illustration.svg'
 import logoImg from '../assets/images/llogo.svg';
@@ -8,6 +10,8 @@ import { Button } from '../components/Button';
 import '../styles/auth.scss';
 
 export function NewRoom() {
+  // const { user } = useContext(AuthContext);
+
   return (
     <div id="page-auth">
       <aside>
@@ -22,14 +26,14 @@ export function NewRoom() {
           <form>
             <input
               type="text"
-              placeholder="Angi romkoden"
+              placeholder="Type the room's code"
             />
             <Button type="submit">
               Enter in the room.
             </Button>
           </form>
           <p>
-            Vil du bli med i et eksisterende rom? <Link to="/">Klikk her</Link>
+            Do you want to join an existing room? <Link to="/">Click here</Link>
           </p>
         </div>
       </main>
